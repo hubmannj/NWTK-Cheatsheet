@@ -36,6 +36,50 @@ Switch(config)#
 no logging console
 ```
 
+### Port Security
+Port Security is a feature used on switch access ports to restrict input to an interface by limiting and identifying MAC addresses.
+
+Switch(config)# interface <INTERFACE-ID>  
+Switch(config-if)#  
+```bash
+switchport mode access
+switchport port-security
+
+```
+You are able to block, maximize and shutdown the Port or a MAC.
+Maximize
+```bash
+switchport port-security maximum 2
+```
+Define a MAC
+```bash
+switchport port-security mac-address <MAC-ADDRESS>
+```
+Learn MAC
+```bash
+switchport port-security mac-address sticky
+```
+
+Protect
+```bash
+switchport port-security violation protect
+
+```
+Shutdown Port
+```bash
+switchport port-security violation shutdown
+
+```
+Show Port Security
+```bash
+show port-security
+```
+Show learned MAC´s
+```bash
+show port-security address
+```
+
+
 ## VLAN´s
 Vlans are used to segment a Network. You are able to set a border between Clients. For example segmentation between 2 Departments -> Production (VLAN 10) and Marketing (VLAN 20). 
 
@@ -113,4 +157,63 @@ ip address <ip> <subnetmask>
 no shut
 exit
 ```
+
+# Special VLAN Protocols
+## VTP 
+VTP (CLAN TRUNKING PROTOCOL) is used to share VLAN´s. It contain a VTP-Server, a VTP-Transparent and a VTP-Client. The VTP domain is created by the Server. In this domain are all Switches which are wanted to receive the VLAN´s. The Border of a domain is a Router. The VTP-Server should always be the Root-Bridge.
+### Problems
+VTP can only share created VLAN´s. VTP can not assign a VLAN to an Access Port or a Trunking Port. You should also think about Security.
+Every VLAN in the Databse of a Server-Switch create one entry. So 3 VLAN´s mean a revison number of 3. The VTP-Server prove the revision number of the Client´s and if the number does not match, he share his VLAN-Database. Hackers can abuse this mechanism by adding one VTP-Server with a higher revision number. After adding, every VLAN in your Network will be overwritten and your Network wont be able to work as before.
+
+### Configuration
+#### Server
+
+Switch(config)#
+```bash
+vtp domain <DOMAIN-Name>
+vtp mode server
+```
+
+#### Client
+
+Switch(config)#
+```bash
+vtp domain <DOMAIN-NAME>
+vtp mode client
+```
+
+#### Transparent
+
+Switch(config)#
+```bash
+vtp domain <DOMAIN-NAME>
+vtp mode transparent
+```
+
+## DTP
+
+DTP (DYNAMIC TRUNKING PROTOCOL) is used to create a Trunk or an Access Port between to Switches. There are different Mode´s which cause a different Solution.
+The states are listed in the table below.
+
+| Port Mode           | Dynamic Auto       | Dynamic Desirable  | Trunk             | Access             |
+|---------------------|--------------------|---------------------|-------------------|--------------------|
+| **Dynamic Auto**     | Access             | Trunk               | Trunk             | Access             |
+| **Dynamic Desirable**| Trunk              | Trunk               | Trunk             | Access             |
+| **Trunk**            | Trunk              | Trunk               | Trunk             | Limited connectivity |
+| **Access**           | Access             | Access              | Limited connectivity | Access          |
+
+### Problems
+DTP is not best practise. Same as VTP, DTP is Cisco proprietary. You should be aware that DTP may cause problems by Etherchanneling. DTP is also subsceptible for missmatches by missconfiguration. Also VTP-Domain missmatches can cause a Problem.
+
+## Configuration
+
+Switch(config)#
+```bash
+int <INT>
+switchport mode <access>/<trunk>
+switchport <depend on the mode you want>
+no shut
+exit
+```
+
 
