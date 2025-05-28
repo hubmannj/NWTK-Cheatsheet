@@ -278,6 +278,7 @@ Spanning tree is a very usefull Protocol. Be aware that a Root Bridge in bad han
 
 ### BPDU-Guard
 BPDU-Guard should be configured on all Access Ports. The Guard prevent that Switches or Hackers can flood BPDU´s in your Network to take over the Root or make STP Topologie changes.
+
 Switch(config)#
 ```bash
 int <INT>
@@ -287,6 +288,7 @@ no shut
 exit
 ```
 You should secure Portfast Access Ports. You can secure every Portfast Port per default with this Command.
+
 Switch(config)#
 ```bash
 spanning-tree portfast bpduguard default
@@ -295,8 +297,26 @@ spanning-tree portfast bpduguard default
 
 ### Root-Guard
 Root Guard is used for every Uplink Port (Ports to other Switches) to prevent a take over of the Root by having a lower priority. If Root-Guard is configured on all Ports of a Switch, you can add a new Switch in your Network that have a lower priority. The other Switches wont let him become the new Root.
+
 Switch(config)#
 ```bash
 int <INT>
 spanning-tree guard root
+```
+
+### BPDU-Filter
+BPDU-Filter prevent receiving and sending of BPDU´s to a Port. But be aware that this can cause STP to not work normally. If you configure this on RP or not Access Ports, STP will create Loops because the electing the Root Bridge Process and may Block no Ports.
+
+Switch(config)#
+```bash
+int <INT>
+spanning-tree bpdufilter enable
+```
+
+Same as before, you can set BPDU-Filter per default to your Portfast Ports.
+
+Switch(config)#
+```bash
+int <INT>
+spanning-tree portfast bpdufilter default
 ```
