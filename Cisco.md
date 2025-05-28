@@ -4,9 +4,55 @@ Topics: Etherchanneling, OSPF, VLAN´s, STP and so on.
 I am going to show some Configurations splitted in Router and Switch. I will describe how these Configs work and how you are able to connect it with a Router or a Switch.
 
 # TABLE OF CONTENT
-- [Basic´s](#basics)
-- [VLAN´s](#vlans)
-- [Special VLAN Protocols](#special-vlan-protocols)
+
+- [Switch](#switch)
+  - [Basic´s](#basics)
+    - [Hostname](#hostname)
+    - [Interface list](#interface-list)
+    - [Interface Ranges](#configure-more-than-one-interface)
+    - [Console Logging](#stop-console-logging)
+    - [Port Security](#port-security)
+  - [VLAN´s](#vlans)
+    - [VLAN create](#create-a-vlan)
+    - [VLAN name](#name-a-vlan)
+    - [VLAN assign](#assign-a-vlan)
+      - [Access Port](#access-port)
+      - [Trunk Port](#trunk-port)
+    - [VLAN Debugging](#vlan-configuration)
+  - [Layer 3 Switch](#layer-3-switch)
+    - [Routing activate](#activate-routing)
+    - [Subinterfaces](#sub-interfaces)
+  - [Special VLAN Protocols](#special-vlan-protocols)
+    - [VTP (VLAN Trunking Protocol)](#vtp)
+      - [Problems with VTP](#problems)
+      - [Configuration](#configuration)
+        - [Server](#server)
+        - [Client](#client)
+        - [Transparent](#transparent)
+    - [DTP (Dynamic Trunking Protocol)](#dtp)
+      - [Problems with DTP](#problems-1)
+      - [Configuration](#configuration-1)
+  - [Spanning Tree Protocol (STP)](#spanning-tree-protocol)
+    - [STP Konfiguration](#configuration-2)
+      - [Root Bridge manuell set](#to-set-a-root-bridge-manually)
+      - [Change Costs](#change-the-path-costs-for-an-interface)
+      - [Portfast](#portfast)
+    - [STP Problems and Security](#problems-2)
+    - [STP Security Features](#security-configuration)
+      - [BPDU-Guard](#bpdu-guard)
+      - [Root Guard](#root-guard)
+      - [BPDU-Filter](#bpdu-filter)
+    - [STP Show-Befehle](#show-commands)
+  - [EtherChannel](#etherchannel)
+    - [XOR Truth Table](#truth-table)
+    - [PAGP](#pagp)
+    - [LACP](#lacp)
+    - [Load Balancing](#load-balance)
+    - [Konfiguration](#configuration-3)
+      - [Load Balancing ](#load-balancing)
+      - [PAGP Configuration](#pagp-1)
+      - [LACP Configuration](#lacp-1)
+    - [Show-Commands](#show-commands-1)
 
 # Switch
 Let´s start with some Configurations for a Cisco Switch. 
@@ -361,3 +407,95 @@ Result = 111
 
 PAGP and LACP have different modes. You can compare it with DTP where you negotiate a Channel.
 
+### PAGP
+Let´s begin with the truth table of PAGP.
+
+| Seite A                | Verbindung     | Seite B        |
+|------------------------|----------------|----------------|
+| On                    | **Channel**     | On             |
+| On/Auto/Desirable     | **No Channel**  | Off            |
+| Auto/Desirable        | **Channel**     | Desirable      |
+| Auto/On               | **No Channel**  | Auto           |
+
+Best practise is a desirable Configuration on both sides.
+
+### LACP
+
+| Seite A     | Verbindung     | Seite B     |
+|-------------|----------------|-------------|
+| Active      | **Channel**     | Active      |
+| Active      | **Channel**     | Passive     |
+| Passive     | **No Channel**  | Passive     |
+| On          | **Channel**     | On          |
+| On          | **No Channel**  | Passive     |
+| On          | **No Channel**  | Active      |
+
+
+As before, use Active Active to form a Channel.
+
+### Load Balance  
+
+| Load-Balance Option  | Beschreibung               | Hash Operation |
+|----------------------|----------------------------|----------------|
+| dst-ip               | Ziel-IP-Adresse            | bits           |
+| dst-mac              | Ziel-MAC-Adresse           | bits           |
+| src-dst-ip           | Quell XOR Ziel IP-Adresse  | XOR            |
+| src-dst-mac          | Quell XOR Ziel MAC-Adresse | XOR            |
+| src-ip               | Quell-IP-Adresse           | bits           |
+| src-mac              | Quell-MAC-Adresse          | bits           |
+
+
+
+### Configuration
+
+#### Load Balancing
+There are different Options to balance. You can choose betwen src and dst.
+
+Switch(config)# 
+```bash
+port-channel load-balance <MODE from the Table>
+```
+
+The Channel-group number is the number of the channel. You can have 2 Channels (num 1 and num 2) on the same Switch. Both are connected to the same or to different Switches.
+
+#### PAGP
+
+Switch(config)# 
+```bash
+interface range <INT>-<INT>
+channel-protocol pagp
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan <VLAN-ID>
+channel-group 1 mode desirable
+```
+
+#### LACP
+
+Switch(config)# 
+```bash
+interface range <INT>-<INT>
+channel-protocol lacp
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan <VLAN-ID>
+channel-group 1 mode active
+
+```
+
+### Show Commands
+
+```bash
+show etherchannel protocol
+
+```
+
+```bash
+show etherchannel load-balance
+
+```
+
+```bash
+show etherchannel summary
+
+```
