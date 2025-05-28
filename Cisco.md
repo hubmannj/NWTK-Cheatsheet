@@ -4,8 +4,11 @@ Topics: Etherchanneling, OSPF, VLAN´s, STP and so on.
 I am going to show some Configurations splitted in Router and Switch. I will describe how these Configs work and how you are able to connect it with a Router or a Switch.
 
 # TABLE OF CONTENT
-- [VLANs](##VLAN´s)
+- [Basic´s](#basics)
+- [VLAN´s](#vlans)
+- [Special VLAN Protocols](#special-vlan-protocols)
 
+- 
 # Switch
 Let´s start with some Configurations for a Cisco Switch. 
 
