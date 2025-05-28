@@ -320,3 +320,44 @@ Switch(config)#
 int <INT>
 spanning-tree portfast bpdufilter default
 ```
+
+## Show Commands
+
+
+```bash
+show spanning-tree /<detail>
+```
+
+
+## Etherchannel
+Channelbonding is e method to expand Interfaces. With a Bond, you are able to have one Connection to a Router or a Switch with 2-8 Ports combined. There are 2 different Protocols. PAGP (PORT AGGREGATION PROTOCOL) and LACP (LINK AGGREGATION CONTROL PROTOCOL). The first one is Cisco proprietary and the second one is for multi vendor Networks. You are able to Load Balance the Traffic. So a Connection to a DST went not every time over the same Link. A perfect Load Balance only work with 2,4 and 8 Link Channels. To Balance the Load, a X-OR Alghorytmen is used. 
+### Truth Table
+
+| Inputs | Output |
+|--------|--------|
+| 0 0    |   0    |
+| 0 1    |   1    |
+| 1 0    |   1    |
+| 1 1    |   0    |
+
+If you want to know, which Link will be used if you communicate to a Source, you can calculate it like that.
+SRC: 172.16.1.1
+DST: 10.10.10.46
+Channel: 8 Links (0-7, because you begin count by 0)
+
+At first, you write down the last Octet in binary.
+SRC: 0000 0000
+DST: 0010 1110
+
+An 8 Link Channel need the last 3 digits to go through the X-OR Operation. 2 Link 1 and 4 Link 2.
+000 and 110
+
+1 XOR 0 = 1
+0 XOR 1 = 1
+0 XOR 1 = 1
+
+Result = 111
+111 is 7 if you read it in Binary. So for this Connection, Link 7 (the last) is used.
+
+PAGP and LACP have different modes. You can compare it with DTP where you negotiate a Channel.
+
