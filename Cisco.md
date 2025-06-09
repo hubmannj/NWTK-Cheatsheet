@@ -495,7 +495,69 @@ show etherchannel load-balance
 
 ```
 
+
 ```bash
 show etherchannel summary
 
+```
+
+# Router
+
+Let´s start with the Router. You will see that the Configuration schema is nearly the same as for the Switch. 
+
+## Basic´s
+
+### Hostname
+
+Router(config)# 
+```bash
+hostname <NAME>
+```
+
+### Interface list
+
+```bash
+show ip interface brief
+```
+
+### Configure more than one Interface
+To configure interface ge 0/1 and 0/2 at the same time. 
+
+Router(config)# 
+```bash
+int range ge<int>-<int>
+```
+
+### Stop console logging
+
+Router(config)# 
+```bash
+no logging console
+```
+
+## VLAN
+As discussed before, VLAN´s are used for Layer 2 segmentation. But to route between VLAN´s, a Router is needed. There are 2 different methods to do this. You can use the Router-On-A-Stick method, which is the best practise for inter VLAN routing.
+
+### Router-On-A-Stick
+Let´s say, we have a connection between a Switch with VLAN 10 and 20. There is already a Trunk on the Switch to the Router. So, we need to create 2 Sub-Interfaces with the VLAN-ID. The Router will be the Default-Gateway for the VLAN-Clients. If the Interface which will be the Trunk Port is ge 0/0, you create the Sub-Interface ge0/0.10 and ge0/0.20. Now, the router is able to route between the VLAN´s.
+
+Router(config)# 
+```bash
+int <INT>.<VLAN-ID>
+encapsulation dot1Q <VLAN-ID>
+ip address <IP of the default-gateway> <SUBNETMASK>
+no shut
+exit
+```
+
+### Seperate Links for every VLAN
+For the second method, every VLAN need one Link. This is not the best method because Router mostly have not enough Interfaces. So you waste Resources which are maybe usefull for other Configurations. 
+You need to configure the default Gateway on the Interface for the VLAN. Be sure, that ge 0/0 is the gateway of VLAN 10 and on the same Access Port connection as the Switch. If you Connect Access Port VLAN 20 with the Gateway of VLAN 10, the Inter-VLAN routing wont work.
+
+Router(config)# 
+```bash
+int <INT>
+ip address <IP of the default-gateway> <SUBNETMASK>
+no shut
+exit 
 ```
