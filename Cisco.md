@@ -564,3 +564,9 @@ exit
 
 ## FHRP
 
+FHRP (FIRST HOP REDUNDANCY PROTOCOL) is used for a redundand Gateway. FHRP is a group of Protocols which are used to have a Gateway for your Hosts although the Standard Gateway isn´t available. In a normal Network is a Host not able to communicate to other Networks if the IP of the Gateway is not reachable or not available. FHRP uses Virtuell IP Addresses. A Router Group (mostly 2 Routers) share the same Virtuell IP which is the entry for the Host. So, if one Router fall out, the Host does not regocnize the failure.
+
+
+### HSRP
+
+The Hot Standby Router Protocol is only for Cisco devices. HSRP uses two Routers in a Group. One is the Active Router and the second is the Standby. The Active Router 
