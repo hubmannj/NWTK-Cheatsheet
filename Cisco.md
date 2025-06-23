@@ -561,3 +561,6 @@ ip address <IP of the default-gateway> <SUBNETMASK>
 no shut
 exit 
 ```
+
+## FHRP
+
