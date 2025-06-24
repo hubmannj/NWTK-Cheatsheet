@@ -574,3 +574,48 @@ The Hot Standby Router Protocol is only for Cisco devices. HSRP uses two Routers
 ### Configuration
 
 In HSRP, a numbered group is used. If you work with Router-on-a-stick, use the vlan-id as the group number for the Router Group on the Sub-Interface. The number must be identical for both Routers. Same for the Virtuell IP Address. Interface tracking is a mechanism where the Router reduce it´s priority automatically if there is a Problem with the outside Interface.
+
+```bash
+int <int>
+standby <group(vlan-id>) ip <virtuell IP>
+standby <group(vlan-id>) priority <priority(default 100)>
+standby <group(vlan-id>) preempt
+standby <group(vlan-id>) track <int> 10
+no shut
+exit
+```
+
+The 10 after track is the Priority value which is given to the Router after a failover.
+
+
+
+
+
+
+
+## Dynamic Routing Protocols
+
+Dynamic Routing Protocols are used to exchange Data automatically in Networks. Where static Routes are configured per hand Protocols like RIP or OSPF are able to adapt Network changes. These Protocols use different Metrics to forward the Traffic to the Destination.
+
+### Static Route
+
+```bash
+ip route <DESTINATION_NETWORK> <SUBNET_MASK> <NEXT_HOP_IP>
+
+```
+or 
+```bash
+ip route <DESTINATION_NETWORK> <SUBNET_MASK> <EXIT_INTERFACE>
+
+```
+
+
+## RIP 
+
+ROUTING INFORMATION PROTOCOL or RIP is the first Protocol to discuss. RIP is a distance Vector Protocol. RIP is an old Protocol and only used for small Networks. To find the perfect path, RIP work with Hopp-Count. This Hopp-Count go from 0-15. So, you are able to have a Network with 15 Routers. The 16 hopp is for RIP the same as infinite. The Protocol work with the Bellman-Ford-Algorythem and send packeges every 30 seconds. There are 2 Versions, v1 and v2. No matter what happen, use v2.
+
+### Configuration
+
+```bash
+
+```
