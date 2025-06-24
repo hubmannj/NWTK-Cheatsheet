@@ -573,4 +573,4 @@ The Hot Standby Router Protocol is only for Cisco devices. HSRP uses two Routers
 
 ### Configuration
 
-In HSRP, a numbered group is used. If you work with Router-on-a-stick, use the vlan-id as the group number for the Router Group on the Sub-Interface. The number must be identical for both Routers. Same for the Virtuell IP Address. Interface tracking mechanism where the Router reduce it´s priority automatically if there is a Problem with the outside Interface.
+In HSRP, a numbered group is used. If you work with Router-on-a-stick, use the vlan-id as the group number for the Router Group on the Sub-Interface. The number must be identical for both Routers. Same for the Virtuell IP Address. Interface tracking is a mechanism where the Router reduce it´s priority automatically if there is a Problem with the outside Interface.
