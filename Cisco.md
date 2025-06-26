@@ -617,5 +617,11 @@ ROUTING INFORMATION PROTOCOL or RIP is the first Protocol to discuss. RIP is a d
 ### Configuration
 
 ```bash
+router rip
+version 2
+network 192.168.1.0
+network 10.0.0.0
+passive-interface <int>
+no auto-summary
 
 ```
