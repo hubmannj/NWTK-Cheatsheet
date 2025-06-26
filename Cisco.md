@@ -633,6 +633,10 @@ RIP: sending v2 update to 192.168.1.2 via Serial0/0
 
 ```
 
+### Administrative Distance (AD)
+
+The default AD in RIP is 120. A lower AD is more appealing. You can change the AD if you want your Traffic to go through a certain Router.
+
 ### Configuration
 
 Passive Interfaces are used for Interfaces where no Router is directly connected. For example if a Switch is connected on Ether 1, configure Ether 1 as a passive Interface. So Ether 1 do not send RIP updates but receive them.
