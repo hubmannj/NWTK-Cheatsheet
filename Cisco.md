@@ -614,6 +614,25 @@ ip route <DESTINATION_NETWORK> <SUBNET_MASK> <EXIT_INTERFACE>
 
 ROUTING INFORMATION PROTOCOL or RIP is the first Protocol to discuss. RIP is a distance Vector Protocol. RIP is an old Protocol and only used for small Networks. To find the perfect path, RIP work with Hopp-Count. This Hopp-Count go from 0-15. So, you are able to have a Network with 15 Routers. The 16 hopp is for RIP the same as infinite. The Protocol work with the Bellman-Ford-Algorythem and send packeges every 30 seconds. There are 2 Versions, v1 and v2. No matter what happen, use v2.
 
+### Split Horizon
+
+Split Horizon is activated per default on Cisco Devices. YOu don´t need to configure it. Split Horizon means that a Router do not send a Route back to an Interface which he learned from this Interface. 
+
+### Route Poisining
+
+It´s configured per default. If a Route isn´t available because it´s not valid anymore, the Router set the Metric to 16 which means infinite. YOu can debug it with the following command.
+
+```bash
+debug ip rip
+```
+
+If a route is poisened, it should look like this.
+```bash
+RIP: sending v2 update to 192.168.1.2 via Serial0/0
+  suppressed 10.0.0.0/8 metric 16
+
+```
+
 ### Configuration
 
 Passive Interfaces are used for Interfaces where no Router is directly connected. For example if a Switch is connected on Ether 1, configure Ether 1 as a passive Interface. So Ether 1 do not send RIP updates but receive them.
@@ -627,3 +646,5 @@ passive-interface <int>
 no auto-summary
 
 ```
+
+
