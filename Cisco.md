@@ -636,6 +636,12 @@ RIP: sending v2 update to 192.168.1.2 via Serial0/0
 ### Administrative Distance (AD)
 
 The default AD in RIP is 120. A lower AD is more appealing. You can change the AD if you want your Traffic to go through a certain Router.
+For this example you set the AD to 95 for the Router 192.168.1.1. 
+```bash
+router rip
+ distance 95 192.168.1.1 0.0.0.0
+
+```
 
 ### Configuration
 
