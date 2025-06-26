@@ -616,11 +616,13 @@ ROUTING INFORMATION PROTOCOL or RIP is the first Protocol to discuss. RIP is a d
 
 ### Configuration
 
+Passive Interfaces are used for Interfaces where no Router is directly connected. For example if a Switch is connected on Ether 1, configure Ether 1 as a passive Interface. So Ether 1 do not send RIP updates but receive them.
+
 ```bash
 router rip
 version 2
-network 192.168.1.0
-network 10.0.0.0
+network <IP>
+network <IP>
 passive-interface <int>
 no auto-summary
 
