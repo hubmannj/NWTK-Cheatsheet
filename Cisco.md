@@ -677,3 +677,6 @@ Here is a Picture from the Routers and Areas.
 ![image](https://github.com/user-attachments/assets/f67c9ca9-1fc8-48fe-8401-db2efda1f7f4)
 
 
+### LSDB
+
+The Link State Database is the heart of OSPF. In RIP, a Router only know it´s direct connected Neighbours. A Router working with OSPF knows the whole Network Topologie. Every Information is stored in this Database. To reduce the size and the amount of resources, work with Multi-Area and do
