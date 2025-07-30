@@ -679,4 +679,13 @@ Here is a Picture from the Routers and Areas.
 
 ### LSDB
 
-The Link State Database is the heart of OSPF. In RIP, a Router only know it´s direct connected Neighbours. A Router working with OSPF knows the whole Network Topologie. Every Information is stored in this Database. To reduce the size and the amount of resources, work with Multi-Area and do
+The Link State Database is the heart of OSPF. In RIP, a Router only know it´s direct connected Neighbours. A Router working with OSPF knows the whole Network Topologie. Every Information is stored in this Database. To reduce the size and the amount of resources, work with Multi-Area OSPF. A Single Area OSPF LSDB has the whole information stored which may leads to performance problems. In Multi-Area, summerized information will be stored.
+
+### Configuration
+OSPF works nearly same as RIP. For best practise, create an Interface Loopback with an ID which will be the router ID for easier identification. For example Router 1 receive the ID 1.1.1.1.
+
+````bash
+interface Loopback0
+ ip address 1.1.1.1 255.255.255.255
+````
+
