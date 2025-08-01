@@ -535,6 +535,18 @@ Router(config)#
 no logging console
 ```
 
+### DHCP-Server
+In big networks, IP-Address management is very annoying. Setting static IP-Addresses for every Client is very frustrating and leads to conflicts if you forgot which IP is already in use. To reduce the issue, include a DHCP server. Clients send DHCPDISCOVER Packets (Broadcasts) per default to search for any DHCP-Server giving them an IP-Address. If there is any Server, they receive a Default Gateway, DNS-Server and IP-Address which can be rotated or not. At first, exclude all addresses not used in the dhcp pool. If you want address from 100 to 150, exclude 0-99 and 151-255.
+
+````bash
+ip dhcp excluded-address <IP> <IP>
+
+ip dhcp pool <NAME>
+ network <IP> <SUBNETMASK>
+ default-router <ROUTER-IP>
+ dns-server <IP>
+````
+
 ## VLAN
 As discussed before, VLAN´s are used for Layer 2 segmentation. But to route between VLAN´s, a Router is needed. There are 2 different methods to do this. You can use the Router-On-A-Stick method, which is the best practise for inter VLAN routing.
 
