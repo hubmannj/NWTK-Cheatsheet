@@ -688,7 +688,11 @@ OSPF works nearly same as RIP. For best practise, create an interface loopback w
 interface Loopback0
  ip address 1.1.1.1 255.255.255.255
 ````
-After creating the loopback interface, add an instance with ID 1 (for example). As best practise, set all interfaces passive for default and activate the Interfaces in use to reduce unnecessary traffic. All direct connected networks need to be added to the instance. Be sure that the second router needs the same area ID. On Cisco devices is no naming possible. On MikroTik, you are able to name area 0 for example area=backbone. Use area 0 for the backbone area and following numbers for added areas. If there are more routers in an area use 1.1.1.2 or 1.1.1.3 for the same area. Otherwise you may be forced to give one router the id 17.17.17.17.
+After creating a loopback interface (e.g., Loopback0), configure OSPF with a process ID such as 1.
+As a best practice, set all interfaces to passive by default using the passive-interface default command. This reduces unnecessary OSPF Hello traffic. Then, explicitly enable OSPF on the required interfaces using no passive-interface <interface>.
+Make sure to include all directly connected networks that should participate in OSPF using appropriate network statements.
+On Cisco devices, OSPF area IDs must be numerical (e.g., area 0, area 1, etc.). Unlike MikroTik, Cisco does not support named areas. On MikroTik, you can assign descriptive area names, such as area=backbone, for better readability.
+Use area 0 for the backbone area and incrementing numbers for additional areas. For consistency and clarity, assign loopback IP addresses like 1.1.1.1, 1.1.1.2, etc., within the same area. Otherwise you may be forced to give one router the id 17.17.17.17.
 
 ````bash
 router ospf 1
