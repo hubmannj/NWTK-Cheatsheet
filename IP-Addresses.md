@@ -23,8 +23,11 @@ A short phrase to remember more easily. If you need halft the hosts, reduce the 
 
 ### Example
 For a /24 subnet:
+
 n = 32 – 24 = 8
+
 2⁸ = 256
+
 256 – 2 = 254 usable hosts.
 
 | Subnet Size | Subnet Mask       | Usable Hosts | Suitable For                                    |
