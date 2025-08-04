@@ -40,3 +40,13 @@ n = 32 – 24 = 8
 | /25         | `255.255.255.128` | 126          | Larger VLANs                                    |
 | /24         | `255.255.255.0`   | 254          | Standard LANs                                   |
 | /16         | `255.255.0.0`     | 65,534       | Very large networks (Warning: often not ideal!) |
+
+## Best Practise
+
+### Structure
+
+Plan your networks with a suitable subnet. If  there are 100 hosts in the network, use a /25 subnetmask. Always plan some addresses for infrastructure. Use .1 -.10 for gateways, printers or servers to make it easier to understand.
+
+### DHCP
+For big networks, use always a DHCP-Server. DHCP reduce the risk of address-conflicts. 
+DHCP offers a default gateway, DNS-Server and a pool range for clients. Every client address will be part of the configured range.
