@@ -16,3 +16,17 @@ There are 3 different spaces for private networks. All other IP`s are public and
 | 192.168.0.0-192.168.255.255| private | small networks (16 bit) |
 | all other | public | internet |
 
+Private IP-Addresses are not allowed to be used in the internet. NAT (Network Address Translation) change private IP´s to public IP`s. When a client want to ping the DNS of Google, the router requests with the public IP given from the ISP.
+
+## Design
+
+| Subnet Size | Subnet Mask       | Usable Hosts | Suitable For                                    |
+| ----------- | ----------------- | ------------ | ----------------------------------------------- |
+| /30         | `255.255.255.252` | 2            | Point-to-point links (e.g., router-to-router)   |
+| /29         | `255.255.255.248` | 6            | Small groups, management, firewalls             |
+| /28         | `255.255.255.240` | 14           | VLANs, small departments                        |
+| /27         | `255.255.255.224` | 30           | Small offices                                   |
+| /26         | `255.255.255.192` | 62           | Medium-sized groups                             |
+| /25         | `255.255.255.128` | 126          | Larger VLANs                                    |
+| /24         | `255.255.255.0`   | 254          | Standard LANs                                   |
+| /16         | `255.255.0.0`     | 65,534       | Very large networks (Warning: often not ideal!) |
