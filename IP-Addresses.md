@@ -19,6 +19,13 @@ There are 3 different spaces for private networks. All other IP`s are public and
 Private IP-Addresses are not allowed to be used in the internet. NAT (Network Address Translation) change private IP´s to public IP`s. When a client want to ping the DNS of Google, the router requests with the public IP given from the ISP.
 
 ## Design
+A short phrase to remember more easily. If you need halft the hosts, reduce the subnet. A /24 subnet has 254 hosts (0 Network and 255 Broadcast) and a /25 subnet has 126 hosts. So, the formula is 2ⁿ - 2 while n is 32-subnetmask. 
+
+### Example
+For a /24 subnet:
+n = 32 – 24 = 8
+2⁸ = 256
+256 – 2 = 254 usable hosts.
 
 | Subnet Size | Subnet Mask       | Usable Hosts | Suitable For                                    |
 | ----------- | ----------------- | ------------ | ----------------------------------------------- |
