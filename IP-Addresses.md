@@ -11,9 +11,9 @@ There are 3 different spaces for private networks. All other IP`s are public and
 
 | SPACE    | TYPE     |  USECASE |
 |----------|----------|----------|
-| 10.0.0.0-10.255.255.255  | private  | big companies (8 bit)  |
-| 172.16.0.0-172.16.255.255| private   | medium companies (12 bit) |
-| 192.168.0.0-192.168.255.255| private | small networks (16 bit) |
+| `10.0.0.0-10.255.255.255`  | private  | big companies (8 bit)  |
+| `172.16.0.0-172.16.255.255` | private   | medium companies (12 bit) |
+| `192.168.0.0-192.168.255.255 `| private | small networks (16 bit) |
 | all other | public | internet |
 
 Private IP-Addresses are not allowed to be used in the internet. NAT (Network Address Translation) change private IP´s to public IP`s. When a client want to ping the DNS of Google, the router requests with the public IP given from the ISP.
