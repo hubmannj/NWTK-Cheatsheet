@@ -9,7 +9,7 @@ The router won't be able to determine which interface should handle traffic dest
 
 There are 3 different spaces for private networks. All other IP`s are public and unique.
 
-| SPACE |  | TYPE     |  USECASE |
+| SPACE    | TYPE     |  USECASE |
 |----------|----------|----------|
 | Wert 1   | Wert 2   | Wert 3   |
 | Wert 4   | Wert 5   | Wert 6   |
