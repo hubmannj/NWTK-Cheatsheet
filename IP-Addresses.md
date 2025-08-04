@@ -11,10 +11,8 @@ There are 3 different spaces for private networks. All other IP`s are public and
 
 | SPACE    | TYPE     |  USECASE |
 |----------|----------|----------|
-| Wert 1   | Wert 2   | Wert 3   |
-| Wert 4   | Wert 5   | Wert 6   |
+| 10.0.0.0-10.255.255.255  | private  | big companies (8 bit)  |
+| 172.16.0.0-172.16.255.255| private   | medium companies (12 bit) |
+| 192.168.0.0-192.168.255.255| private | small networks (16 bit) |
+| all other | public | internet |
 
-| Spalte 1 | Spalte 2 | Spalte 3 |
-|----------|----------|----------|
-| Wert 1   | Wert 2   | Wert 3   |
-| Wert 4   | Wert 5   | Wert 6   |
