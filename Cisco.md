@@ -682,34 +682,18 @@ Let’s say Router 0 is the starting point.
 
 The algorithm works like this:
 
-1. Initialization
-Set the cost to reach the starting router (Router 0) to 0.
+### 1. Initialization
+Set the cost to reach the starting router (Router 0) to 0. Set the cost to reach all other routers to ∞ (infinity). Mark all routers as unvisited. Create an empty predecessor list (to track the shortest path tree).
 
-Set the cost to reach all other routers to ∞ (infinity).
-
-Mark all routers as unvisited.
-
-Create an empty predecessor list (to track the shortest path tree).
-
-2. Process the nearest router
-Always pick the unvisited router with the lowest known cost.
-
-For each of its neighbors, calculate the new cost via this router:
+### 2. Process the nearest router
+Always pick the unvisited router with the lowest known cost. For each of its neighbors, calculate the new cost via this router:
 
 New cost = current cost to this router + cost of the link to neighbor
 
-If this new cost is lower than the previous cost to reach that neighbor, update:
+If this new cost is lower than the previous cost to reach that neighbor, update the neighbor’s cost, its predecessor (the current router) and mark the current router as visited (its cost is now final).
 
-the neighbor’s cost
-
-its predecessor (the current router)
-
-Mark the current router as visited (its cost is now final).
-
-3. Repeat
-Continue with the next closest unvisited router.
-
-Repeat until all routers are visited or no shorter paths can be found.
+### 3. Repeat
+Continue with the next closest unvisited router. Repeat until all routers are visited or no shorter paths can be found.
 
 Here is a table to have a better overview.
 
