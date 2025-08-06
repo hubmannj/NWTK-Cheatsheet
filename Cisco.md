@@ -53,7 +53,8 @@ I am going to show some configurations splitted in Router and Switch. I will des
       - [PAGP Configuration](#pagp-1)
       - [LACP Configuration](#lacp-1)
     - [Show-Commands](#show-commands-1)
-
+- [Router](#Router)
+  
 # Switch
 Let´s start with some configurations for a Cisco switch. 
 
