@@ -672,10 +672,59 @@ OPEN SHORTEST PATH FIRST or OSPF is another dynamic routing protocol. It´s the 
 
 ### Dijkstra-Alghorythm
 
-The algorithm calculate the shortest path with the lowest path-costs to the DST. This algorithm is the heart of OSPF. To understand Djikstra, a basic knowledge about graph theory is needed. Every node knew all connection in the whole network. The alghoritm calculate the shortest path with the local router as root. Here is a short example for calculation. suppose this is the graph:
+Dijkstra’s algorithm is used in OSPF to calculate the shortest path (i.e., the lowest total cost) from the local router to all other routers in the network. It builds a shortest-path tree (SPT) with the local router as the root. To understand Dijkstra’s algorithm, you need a basic understanding of graph theory. In OSPF, each router has a complete view of the network topology (thanks to the LSDB), including all routers (nodes) and links (edges with cost values).
+
+Suppose this is the graph:
 
 <img width="763" height="478" alt="image" src="https://github.com/user-attachments/assets/0bc5a037-459e-47e1-9a78-26d62280480e" />
 
+Let’s say Router 0 is the starting point.
+
+The algorithm works like this:
+
+1. Initialization
+Set the cost to reach the starting router (Router 0) to 0.
+
+Set the cost to reach all other routers to ∞ (infinity).
+
+Mark all routers as unvisited.
+
+Create an empty predecessor list (to track the shortest path tree).
+
+2. Process the nearest router
+Always pick the unvisited router with the lowest known cost.
+
+For each of its neighbors, calculate the new cost via this router:
+
+New cost = current cost to this router + cost of the link to neighbor
+
+If this new cost is lower than the previous cost to reach that neighbor, update:
+
+the neighbor’s cost
+
+its predecessor (the current router)
+
+Mark the current router as visited (its cost is now final).
+
+3. Repeat
+Continue with the next closest unvisited router.
+
+Repeat until all routers are visited or no shorter paths can be found.
+
+Here is a table to have a better overview.
+
+| node   | actual costs   | predecessor            | status    |
+| ------ | -------------- | ---------------------- | --------- |
+| 0      | 0              | -                      | visited   |
+| 1      | 2              | 0                      | visited   |
+| 2      | 6              | 0                      | visited   |
+| 3      | 5              | 1                      | visited   |
+| 4      | 10             | 3                      | visited   |
+| 5      | 15             | 3                      | visited   |
+| 6      | 2              | 4                      | visited   |
+
+If you want to know the shortest path to router 6, read the table backwords. You have noted the router you visited before.
+The Shortest path to router 6 is over router 4, router 3 and router 1. The last step is to add the costs. 2 + 10 + 5 + 2 = 19. This works for every router.
 
 
 ### LSA´s
