@@ -689,6 +689,7 @@ Here is a Picture from the routers and areas.
 The Link State Database is the heart of OSPF. In RIP, a router only know it´s direct connected neighbours. A router working with OSPF knows the whole network topologie. Every information is stored in this database. To reduce the size and the amount of resources, work with Multi-Area OSPF. A Single Area OSPF LSDB has the whole information stored which may leads to performance problems. In Multi-Area, summerized information will be stored.
 
 ### Configuration
+
 OSPF works nearly same as RIP. For best practise, create an interface loopback with an ID which will be the router ID for easier identification. For example Router 1 receive the ID 1.1.1.1.
 
 ````bash
@@ -711,4 +712,33 @@ router ospf 1
  network <NETWORK IP> <WILDCARD> area <ID>
  network <NETWORK IP> <WILDCARD> area <ID>
 ````
+#### Virtual-link
+
+A virtual link is a virtual tunnel through a transit area. Sometimes, an area is not directly connected to the backbone area (Area 0).
+In this case, this area – for example Area 2 – needs a virtual connection through Area 1 into Area 0.
+Otherwise, clients in Area 2 cannot reach clients in Area 0.
+
+To create a virtual link, two routers are needed:
+
+The ABR between Area 0 and Area 1
+
+The ABR between Area 1 and Area 2
+
+The virtual link connects these two routers logically through Area 1.
+One important requirement is the router ID of both routers, which must be included in the command.
+
+Important: A virtual link is only possible through a transit area. A stub area cannot be used as a transit area.
+
+Area Types:
+Transit area: An area that connects other areas and allows OSPF traffic to pass through (e.g., Area 1 in this example).
+
+Stub area: A dead-end area that does not forward external or inter-area routes, and typically only receives a default route
+
+A virtual-link is a virtual tunnel throuhg a transit area. Sometimes, an area is not directly connected to the backbone area. In this case, this area for example area 2 need a link through area 1 into area 0. Otherwise, clients in area 2 can not reach clients in area 0. To create a virtuel-link, to routers are needed. The ABR from area 0-1 and the ABR from area 1-2. The virtual-link connect these two routers. The second thing needed is the router-id of both routers which will be added to the command. Important to know, a virtual-link is only possible for transit-areas. A stub-area can not be used for a virtual-link. 
+
+Transit-area:
+Another area is connected to this area.
+
+Stub-area:
+This area is the last area.
 
