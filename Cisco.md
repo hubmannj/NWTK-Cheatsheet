@@ -672,7 +672,10 @@ OPEN SHORTEST PATH FIRST or OSPF is another dynamic routing protocol. It´s the 
 
 ### Dijkstra-Alghorythm
 
-The algorithm calculate the shortest path with the lowest path-costs to the DST. This algorithm is the heart of OSPF. To understand Djikstra, a basic knowledge about graph theory is needed. 
+The algorithm calculate the shortest path with the lowest path-costs to the DST. This algorithm is the heart of OSPF. To understand Djikstra, a basic knowledge about graph theory is needed. Every node knew all connection in the whole network. The alghoritm calculate the shortest path with the local router as root. Here is a short example for calculation. suppose this is the graph:
+
+<img width="763" height="478" alt="image" src="https://github.com/user-attachments/assets/0bc5a037-459e-47e1-9a78-26d62280480e" />
+
 
 
 ### LSA´s
