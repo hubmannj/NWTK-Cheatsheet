@@ -721,12 +721,27 @@ Otherwise, clients in Area 2 cannot reach clients in Area 0. To create a virtual
 The ABR between Area 0 and Area 1 and the ABR between Area 1 and Area 2.
 
 The virtual link connects these two routers logically through Area 1.
-One important requirement is the router ID of both routers, which must be included in the command.
-
-Important: A virtual link is only possible through a transit area. A stub area cannot be used as a transit area.
+One important requirement is the router ID of both routers, which must be included in the command. A virtual link is only possible through a transit area. A stub area cannot be used as a transit area.
 
 Transit area: An area that connects other areas and allows OSPF traffic to pass through (e.g., Area 1 in this example).
 
 Stub area: A dead-end area that does not forward external or inter-area routes, and typically only receives a default route
 
+````bash
+router ospf 1
+area <transit-area> virtual-link <Router-ID>
+````
 
+If the router with the router-id 1.1.1.1 is the ABR of area 0-1 and the router with the router-id 2.2.2.2 is the ABR of the area 1-2, the link would look like this.
+
+ABR area 0-1:
+
+````bash
+ area 1 virtual-link 2.2.2.2
+````
+
+ABR area 1-2:
+
+````bash
+ area 1 virtual-link 1.1.1.1
+````
