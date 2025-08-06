@@ -745,3 +745,17 @@ ABR area 1-2:
 ````bash
  area 1 virtual-link 1.1.1.1
 ````
+
+#### Default route
+
+If a router has no information (no route entry in its routing table) about a destination network, it does not know what to do with the packet. In such cases, the router may respond with an error message like "Destination Host Unreachable".
+To prevent this issue, you can use default routes. In multi-area OSPF environments, clients might not be able to reach the internet because they don't know how to forward packets to external networks. To solve this, configure a default route on the ASBR (Autonomous System Boundary Router) and redistribute it into OSPF.
+This ensures that all routers in the OSPF domain learn a default route and can forward traffic for unknown destinations to the ASBR.
+
+````bash
+ip route 0.0.0.0 0.0.0.0 <OUTGOING-INTERFACE>
+router ospf 1
+ default-information originate
+
+````
+
