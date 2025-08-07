@@ -1,7 +1,7 @@
 # Here you will be able to find Cisco router and switch configurations for certain topics
 
 Topics: Etherchanneling, OSPF, VLAN´s, STP, RIP, FHRP and so on.
-I am going to show some configurations splitted in Router and Switch. I will describe how these configs work and how you are able to connect it with a Router or a Switch.
+I am going to show some configurations splitted in router and switch. I will describe how these configs work and how you are able to connect it with a router or a switch.
 
 # TABLE OF CONTENT
 
