@@ -628,6 +628,19 @@ exit
 
 The 10 after track is the priority value which is given to the Router after a failover.
 
+### VRRP
+
+The Virtual Router Redundancy Protocol is an open standard (IEEE) and works on any vendor. VRRP uses a group of routers where one is the Master and the others are Backup routers. The Master handles all traffic, the Backup routers only take over after a failover. Unlike HSRP, VRRP uses the term Master instead of Active.
+
+```bash
+int <int>
+vrrp <group(vlan-id)> ip <virtual IP>
+vrrp <group(vlan-id)> priority <priority(default 100)>
+vrrp <group(vlan-id)> preempt
+vrrp <group(vlan-id)> track 1 decrement 10
+no shut
+exit
+````
 
 ## Dynamic Routing Protocols
 
